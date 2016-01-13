@@ -1,0 +1,59 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    <!--<TextView-->
+        <!--android:id="@+id/textView1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:background="#8866ff00"-->
+        <!--android:gravity="center"-->
+        <!--android:text="功能列表"-->
+        <!--android:textColor="@color/black"-->
+        <!--android:textSize="22sp" />-->
+    <style name="TitleTheme">
+        <!-- Customize your theme here. -->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">#8866ff00</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+
+
+    <style name="steup_content_theme">
+        <!-- Customize your theme here. -->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20sp</item>
+
+    </style>
+    <style name="NextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:background">@drawable/button_green</item>
+        <item name="android:drawableRight">@drawable/next</item>
+        <item name="android:text">下一步</item>
+        <item name="android:onClick">next</item>
+    </style><style name="PreviousStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:background">@drawable/button_green</item>
+        <item name="android:drawableLeft">@drawable/previous</item>
+        <item name="android:text">上一步</item>
+        <item name="android:onClick">previous</item>
+    </style>
+</resources>

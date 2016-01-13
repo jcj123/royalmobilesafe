@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/apiDemos/apiDemos.iml" filepath="$PROJECT_DIR$/apiDemos/apiDemos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/autolockscreen/autolockscreen.iml" filepath="$PROJECT_DIR$/autolockscreen/autolockscreen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/multiclick/multiclick.iml" filepath="$PROJECT_DIR$/multiclick/multiclick.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rocket/rocket.iml" filepath="$PROJECT_DIR$/rocket/rocket.iml" />
+      <module fileurl="file://$PROJECT_DIR$/royalmobilesafe.iml" filepath="$PROJECT_DIR$/royalmobilesafe.iml" />
+    </modules>
+  </component>
+</project>

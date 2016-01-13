@@ -1,0 +1,2 @@
+include ':app', ':autolockscreen', ':multiclick', ':rocket'
+include ':apiDemos'
