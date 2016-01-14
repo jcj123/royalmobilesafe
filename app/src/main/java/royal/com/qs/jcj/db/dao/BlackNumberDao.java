@@ -134,6 +134,10 @@ public class BlackNumberDao {
         return blackNumbers;
     }
 
+    /**
+     * 得到所有的电话条目数
+     * @return
+     */
     public int getTotalNumber() {
         db = helper.getReadableDatabase();
         final Cursor cursor = db.rawQuery("select count(*) from blacknumber", null);
@@ -142,5 +146,14 @@ public class BlackNumberDao {
             count = cursor.getInt(0);
         }
         return count;
+    }
+
+    public void add(String number,String mode) {
+        db = helper.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("number",number);
+        values.put("mode",mode);
+        db.insert("blacknumber",null,values);
+        db.close();
     }
 }

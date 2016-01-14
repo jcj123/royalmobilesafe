@@ -1,16 +1,20 @@
 package royal.com.qs.jcj.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -165,8 +169,68 @@ public class CallSmsSafeActivity extends Activity {
             TextView tv_mode;
         }
 
-        public void addNumber(View view) {
+    }
 
-        }
+    /**
+     * 添加黑名单
+     * @param view
+     */
+    public void addNumber(View view) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog dialog = builder.create();
+        builder.setTitle("添加黑名单");
+        final View dialog_bn = View.inflate(this, R.layout.dialog_addblacknumber, null);
+        final EditText et_addBlackNumber = (EditText) dialog_bn.findViewById(R.id.et_addBlackNumber);
+        final CheckBox cb_block_phone = (CheckBox) dialog_bn.findViewById(R.id.cb_block_phone);
+        final CheckBox cb_block_sms = (CheckBox) dialog_bn.findViewById(R.id.cb_block_sms);
+
+
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                final String number = et_addBlackNumber.getText().toString();
+                if(TextUtils.isEmpty(number)) {
+                    Toast.makeText(CallSmsSafeActivity.this,"亲，黑名单号码不能为空",
+                            Toast.LENGTH_SHORT).show();
+                }
+                String mode = "";
+                if(cb_block_phone.isChecked()&& cb_block_sms.isChecked()){
+                    mode = "1";
+                }else if(cb_block_phone.isChecked()){
+                    mode = "2";
+                }else if(cb_block_sms.isChecked()){
+                    mode = "3";
+                }else{
+                    Toast.makeText(CallSmsSafeActivity.this,"请勾选拦截模式",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                final BlackNumber blackNumber = new BlackNumber(number, mode);
+                numbers.add(0,blackNumber);
+
+                dao.add(number,mode);
+
+                if (adapter==null) {
+                    adapter = new BlackNumberAdapter(CallSmsSafeActivity.this,
+                            R.layout.list_items_blacknumber,numbers);
+                    lv_blacknumber.setAdapter(adapter);
+                }else {
+                    adapter.notifyDataSetChanged();
+                }
+
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                System.out.println("取消");
+                dialog.dismiss();
+            }
+        });
+        builder.setView(dialog_bn);
+
+        builder.show();
     }
 }
