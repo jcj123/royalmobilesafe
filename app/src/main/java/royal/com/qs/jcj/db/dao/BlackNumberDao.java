@@ -156,4 +156,18 @@ public class BlackNumberDao {
         db.insert("blacknumber",null,values);
         db.close();
     }
+
+    /**
+     * 根据电话号码查询出对应的拦截模式
+     * @param number
+     * @return
+     */
+    public String findMode(String number) {
+        db = helper.getReadableDatabase();
+        final Cursor cursor = db.query("blacknumber", new String[]{"mode"}, "number=?",
+                new String[]{number}, null, null, null);
+        cursor.moveToNext();
+        final String mode = cursor.getString(0);
+        return mode;
+    }
 }

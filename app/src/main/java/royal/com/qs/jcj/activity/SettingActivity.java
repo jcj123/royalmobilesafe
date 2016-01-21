@@ -13,6 +13,7 @@ import android.view.Window;
 
 import royal.com.qs.jcj.R;
 import royal.com.qs.jcj.service.AddressService;
+import royal.com.qs.jcj.service.CallSmsSafeService;
 import royal.com.qs.jcj.utils.ServiceUtils;
 import royal.com.qs.jcj.view.SettingDialog;
 import royal.com.qs.jcj.view.SettingView;
@@ -27,6 +28,7 @@ public class SettingActivity extends Activity {
     private SettingDialog sd_address_position;
 
     SharedPreferences mPref;
+    private SettingView stv_blacknumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,8 @@ public class SettingActivity extends Activity {
         chooseAddress();
         //归属地提示框显示位置
         showAddressPosition();
+        //黑名单设置
+        stv_blacknumber_setting();
     }
 
     private void showAddressPosition() {
@@ -54,7 +58,7 @@ public class SettingActivity extends Activity {
         sd_address_position.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SettingActivity.this,DragAddressActivity.class));
+                startActivity(new Intent(SettingActivity.this, DragAddressActivity.class));
             }
         });
     }
@@ -66,10 +70,10 @@ public class SettingActivity extends Activity {
         stv = (SettingView) findViewById(R.id.stv);
         // stv.setTitle("自动跟新设置");
         final boolean isChecked = mPref.getBoolean("isChecked", true);
-        if(isChecked) {
+        if (isChecked) {
             stv.setmDesp("自动跟新已开启");
             stv.setCheck(true);
-        }else {
+        } else {
             stv.setmDesp("自动跟新已关闭");
             stv.setCheck(false);
         }
@@ -88,6 +92,9 @@ public class SettingActivity extends Activity {
         });
     }
 
+    /**
+     * 电话归属地显示设置
+     */
     private void stv_addressSetting() {
         stv_address = (SettingView) findViewById(R.id.stv_address);
 
@@ -104,10 +111,10 @@ public class SettingActivity extends Activity {
         stv_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(stv_address.isChecked()) {
+                if (stv_address.isChecked()) {
                     stv_address.setCheck(false);
                     stopService(new Intent(SettingActivity.this, AddressService.class));
-                }else {
+                } else {
                     stv_address.setCheck(true);
                     //开启电话归属地监听的服务
                     startService(new Intent(SettingActivity.this, AddressService.class));
@@ -115,10 +122,40 @@ public class SettingActivity extends Activity {
             }
         });
     }
+
+    private void stv_blacknumber_setting() {
+        stv_blacknumber = (SettingView) findViewById(R.id.stv_blacknumber);
+
+        // 根据归属地服务是否运行来更新checkbox
+        boolean serviceRunning = ServiceUtils.isServiceRunning(this,
+                "royal.com.qs.jcj.service.CallSmsSafeService");
+
+        if (serviceRunning) {
+            stv_blacknumber.setCheck(true);
+        } else {
+            stv_blacknumber.setCheck(false);
+        }
+
+        stv_blacknumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (stv_blacknumber.isChecked()) {
+                    stv_blacknumber.setCheck(false);
+                    stopService(new Intent(SettingActivity.this, CallSmsSafeService.class));
+                } else {
+                    stv_blacknumber.setCheck(true);
+                    //开启电话归属地监听的服务
+                    startService(new Intent(SettingActivity.this, CallSmsSafeService.class));
+                }
+            }
+        });
+    }
+
     /**
      * 归属地提示框风格
      */
-    final String[] items = new String[]{"半透明","活力橙","卫士蓝","金属灰","苹果绿"};
+    final String[] items = new String[]{"半透明", "活力橙", "卫士蓝", "金属灰", "苹果绿"};
+
     private void chooseAddress() {
         sd_address = (SettingDialog) findViewById(R.id.view_sd);
         sd_address.setTitle("归属地提示框风格");

@@ -21,8 +21,10 @@
         android:text="短信拦截"
         />
     <ImageView
+        android:id="@+id/iv_del_blacknumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:layout_alignParentRight="true"
         android:src="@drawable/del_blacknumber"
         />

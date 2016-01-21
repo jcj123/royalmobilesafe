@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -138,12 +139,13 @@ public class CallSmsSafeActivity extends Activity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            BlackNumber blackNumber = numbers.get(position);
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            final BlackNumber blackNumber = numbers.get(position);
             View view = View.inflate(CallSmsSafeActivity.this, resourceId, null);
             ViewHolder holder = new ViewHolder();
             holder.tv_number = (TextView) view.findViewById(R.id.tv_number);
             holder.tv_mode = (TextView) view.findViewById(R.id.tv_mode);
+            holder.iv_del_blacknumber = (ImageView) view.findViewById(R.id.iv_del_blacknumber);
             view.setTag(holder);
             if (convertView != null) {
                 view = convertView;
@@ -161,12 +163,22 @@ public class CallSmsSafeActivity extends Activity {
             } else if (mode.equals("3")) {
                 tv_mode.setText("短信拦截");
             }
+
+            holder.iv_del_blacknumber.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    numbers.remove(position);
+                    dao.delete(blackNumber.getNumber());
+                    adapter.notifyDataSetChanged();
+                }
+            });
             return view;
         }
 
         class ViewHolder {
             TextView tv_number;
             TextView tv_mode;
+            ImageView iv_del_blacknumber;
         }
 
     }

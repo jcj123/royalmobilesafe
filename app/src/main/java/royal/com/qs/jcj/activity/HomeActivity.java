@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import royal.com.qs.jcj.R;
 import royal.com.qs.jcj.domian.Icon;
 import royal.com.qs.jcj.utils.MD5Utils;
@@ -54,7 +55,10 @@ public class HomeActivity extends Activity {
                         showPasswordDialog();
                         break;
                     case 1:
-                        startActivity(new Intent(HomeActivity.this,CallSmsSafeActivity.class));
+                        startActivity(new Intent(HomeActivity.this, CallSmsSafeActivity.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(HomeActivity.this, AppManageActivity.class));
                         break;
                     case 7:
                         startActivity(new Intent(HomeActivity.this, HighLevelToolsActivity.class));
@@ -80,7 +84,7 @@ public class HomeActivity extends Activity {
      * 弹出登录页面
      */
     private void showLoginDialog() {
-        View v = View.inflate(this,R.layout.safe_login_dialog,null);
+        View v = View.inflate(this, R.layout.safe_login_dialog, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final AlertDialog alertDialog = builder.create();
         alertDialog.setView(v);
@@ -94,11 +98,11 @@ public class HomeActivity extends Activity {
             @Override
             public void onClick(View v) {
                 final String password = mPassword.getText().toString();
-                String confirmPW = mPref.getString("password",null);
+                String confirmPW = mPref.getString("password", null);
                 if (!TextUtils.isEmpty(password)) {
                     if (MD5Utils.encode(password).equals(confirmPW)) {
                         alertDialog.dismiss();
-                        startActivity(new Intent(HomeActivity.this,LostFindActivity.class));
+                        startActivity(new Intent(HomeActivity.this, LostFindActivity.class));
                     } else {
                         Toast.makeText(HomeActivity.this, "密码错误", Toast.LENGTH_LONG).show();
                     }
@@ -137,10 +141,10 @@ public class HomeActivity extends Activity {
                 final String confirmPW = mConfirmPw.getText().toString();
                 if (!TextUtils.isEmpty(password) && !TextUtils.isEmpty(confirmPW)) {
                     if (password.equals(confirmPW)) {
-                        mPref.edit().putString("password",MD5Utils.encode(password)).commit();
+                        mPref.edit().putString("password", MD5Utils.encode(password)).commit();
                         setPasswordDialog.dismiss();
 
-                        startActivity(new Intent(HomeActivity.this,LostFindActivity.class));
+                        startActivity(new Intent(HomeActivity.this, LostFindActivity.class));
                     } else {
                         Toast.makeText(HomeActivity.this, "账户名和密码不一致", Toast.LENGTH_LONG).show();
                     }
