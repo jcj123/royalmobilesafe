@@ -19,4 +19,17 @@
         android:drawableLeft="@android:drawable/ic_menu_camera"
         android:background="@drawable/phone_selector"
         />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/phone_selector"
+        android:clickable="true"
+        android:drawableLeft="@android:drawable/ic_menu_camera"
+        android:onClick="backupSms"
+        android:padding="10dp"
+        android:text="短信备份"
+        android:textColor="@color/black"
+        android:textSize="23sp" />
+
 </LinearLayout>

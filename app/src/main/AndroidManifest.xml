@@ -15,8 +15,10 @@
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.READ_CALL_LOG"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_CALL_LOG"></uses-permission>
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
+    <uses-permission android:name="android.permission.READ_SMS"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_SMS"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -24,6 +26,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- 欢迎页面 -->
         <activity
             android:name=".activity.SplashActivity"
             android:label="@string/app_name">
@@ -33,7 +37,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- 主界面 -->
         <activity android:name=".activity.HomeActivity" />
+        <!-- 设置模块界面 -->
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.LostFindActivity" />
         <activity android:name=".activity.Setup1Activity" />
@@ -79,7 +85,7 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".activity.AppManageActivity"></activity>
+        <activity android:name=".activity.AppManageActivity" />
     </application>
 
 </manifest>
