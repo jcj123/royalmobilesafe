@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -110,6 +111,27 @@ public class SplashActivity extends Activity {
 
         splashAnimation();
         initDBAddress("address.db");
+
+        /**
+         * 设置快捷图标
+         */
+        final Intent intent = new Intent();
+
+        intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+        //如果设置为true表示可以创建重复的快捷方式
+        intent.putExtra("duplicate", false);
+
+        intent.putExtra(Intent.EXTRA_SHORTCUT_NAME,"royal手机卫士");
+        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, BitmapFactory.decodeResource
+                (getResources(),R.mipmap.ic_launcher));
+
+        final Intent shortCutIntent = new Intent();
+        shortCutIntent.setAction("jcj.royal");
+        shortCutIntent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT,shortCutIntent);
+        System.out.println("hhehheheeh");
+        sendBroadcast(intent);
+
     }
 
     private void initDBAddress(String dbName) {

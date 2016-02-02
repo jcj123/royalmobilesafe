@@ -42,7 +42,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_alignParentRight">true</item>
-        <item name="android:background">@drawable/button_green</item>
+        <item name="android:background">@drawable/button_selector</item>
         <item name="android:drawableRight">@drawable/next</item>
         <item name="android:text">下一步</item>
         <item name="android:onClick">next</item>
@@ -51,7 +51,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:background">@drawable/button_green</item>
+        <item name="android:background">@drawable/button_selector</item>
         <item name="android:drawableLeft">@drawable/previous</item>
         <item name="android:text">上一步</item>
         <item name="android:onClick">previous</item>

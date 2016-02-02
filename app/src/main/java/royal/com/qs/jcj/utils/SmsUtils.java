@@ -73,7 +73,7 @@ public class SmsUtils {
                     xmlSerializer.text(type);
                     xmlSerializer.endTag(null, "type");
                     xmlSerializer.startTag(null, "body");
-                    xmlSerializer.text(body);
+                    xmlSerializer.text(Crypto.encrypt("123",body));
                     xmlSerializer.endTag(null, "body");
 
                     xmlSerializer.endTag(null, "sms");
